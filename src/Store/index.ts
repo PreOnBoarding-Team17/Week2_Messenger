@@ -1,20 +1,7 @@
-import { createStore } from "redux";
+import { createStore } from 'redux';
+import reducer from 'Store/Reducers';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store = createStore();
+const store = createStore(reducer, composeWithDevTools());
 
 export default store;
-
-/*
-interface message {
-	userId: string;
-  userName: string;
-  profileImage: string;
-  content: string; 
-  date: string; // "yyyy-mm-dd hh:MM:ss
-  
-}
-
-
-
-
-*/

@@ -1,34 +1,68 @@
-// 메시지의 데이터 모델에는 userId, userName, profileImage, content, date 등이 있습니다. 옵션 Reply
+import {
+  SEND_MESSAGE,
+  DELETE_MESSAGE,
+  REPLY_MESSAGE,
+  LOGIN_USER,
+} from 'Store/Actions/types';
+import { formatDate } from 'Utils/Constant/';
 
-export const SEND_MESSAGE = "SEND_MESSAGE" as const;
-export const DELETE_MESSAGE = "DELETE_MESSAGE" as const;
-export const REPLY_MESSAGE = "REPLY_MESSAGE" as const;
-export const LOGIN_USER = "LOGIN_USER" as const;
+let USER_ID = 4;
+let MESSAGE_ID = 6;
 
-// 메세지 보내기 -> MessageInterface
-export function sendMessage() {
+// 메세지 보내기
+export function sendMessage(userId: number, message: string) {
   return {
     type: SEND_MESSAGE,
+    payload: {
+      id: MESSAGE_ID++,
+      userId,
+      content: message,
+      date: formatDate(),
+      reply: null,
+    },
   };
 }
 
-// 답장하기 -> MessageInterface
-export function replyMessage() {
+// 답장하기
+export function replyMessage(
+  userId: number,
+  message: string,
+  replyMessageId: number
+) {
   return {
     type: REPLY_MESSAGE,
+    payload: {
+      id: MESSAGE_ID++,
+      userId,
+      content: message,
+      date: formatDate(),
+      replyMessageId,
+    },
   };
 }
 
-// 삭제하기 -> MessageInterface
-export function deleteMessage() {
+// 삭제하기
+export function deleteMessage(messageId: number) {
   return {
     type: DELETE_MESSAGE,
+    payload: messageId,
   };
 }
 
-// 로그인하기 -> UserInterface
-export function loginUser() {
+// 로그인
+export function loginUser(userName: string, _profileImage: string) {
   return {
     type: LOGIN_USER,
+    payload: {
+      userId: USER_ID++,
+      userName,
+      profileImage: 'a',
+    },
   };
 }
+
+export type MessengerAction =
+  | ReturnType<typeof sendMessage>
+  | ReturnType<typeof replyMessage>
+  | ReturnType<typeof deleteMessage>
+  | ReturnType<typeof loginUser>;

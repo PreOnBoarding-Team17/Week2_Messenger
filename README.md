@@ -1,46 +1,111 @@
-# Getting Started with Create React App
+# Week2_Assignment\_\_Messenger 📱
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. [프로젝트 소개 🚀](#1-프로젝트-소개-)
+2. [구현 기능 📍](#2-구현-기능-)
+3. [프로젝트 구조 🌲](#3-프로젝트-구조-)
+4. [역할 👋🏻](#4-역할-)
+5. [프로젝트 제작 과정 ✍🏻](#5-프로젝트-제작-과정-)
+6. [프로젝트 설치 및 실행 ✨](#6-프로젝트-설치-및-실행-)
 
-## Available Scripts
+<br/>
 
-In the project directory, you can run:
+[🌍 배포 링크]()
 
-### `yarn start`
+<br />
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 1. 프로젝트 소개 🚀
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- 개요 : 원티드 프론트엔드 프리온보딩 2기 2주차 4번째 기업 과제
+- 주제 : 답장, 삭제 메세지 기능을 갖춘 메신저 제작
+- 기간 : 2022.02.10 ~ 2022.02.12
 
-### `yarn test`
+<br />
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 2. 구현 기능 📍
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br />
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 3. 프로젝트 구조 🌲
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+src
+├── Assets
+├── Components
+│   ├── MessengerHeader
+│   ├── MessageInput
+│   ├── MessageList
+│   │   └── Message.tsx
+│   └── MessengerLogin
+├── Store
+│   ├── Actions
+│   ├── Reducers
+│   └── index.ts
+├── Utils
+│    └── Styles
+│        ├── _mixins.scss
+│        ├── _reset.scss
+│        └── _variables.scss
+├── App.scss
+├── App.tsx
+└── index.tsx
+```
 
-### `yarn eject`
+[자세한 설명 보기](https://github.com/PreOnBoarding-Team17/Week2_Messenger/issues/1)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<br/>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 4. 역할 👋🏻
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+| 이름                                       | 담당 역할                                                     |
+| ------------------------------------------ | ------------------------------------------------------------- |
+| [황상섭](https://github.com/sangseophwang) |  |
+| [정인권](https://github.com/developjik)    |  |
+| [현다솜](https://github.com/som-syom)      |  |
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<br/>
 
-## Learn More
+## 5. 프로젝트 제작 과정 ✍🏻
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### [1] 컨벤션은 다음과 같이 정했습니다 ✨
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| 커밋명 | 내용 |
+| --- | --- |
+| ✨ feat | 파일, 폴더, 새로운 기능 추가 |
+| 🐛 fix | 버그 수정 |
+| 💄 style | 코드 스타일 변경 |
+| 📝 docs | 문서 생성, 추가, 수정(README.md) |
+| ♻️ refactor | 코드 리팩토링 |
+| 🚑️ chore | 코드 수정 (JSON 데이터 포맷 변경 / scss 변경 등) |
+
+자세한 내용은 [여기](https://github.com/PreOnBoarding-Team17/Week2_Messenger/issues/2)를 클릭해 확인해보세요!
+
+#### [2] 풀 리퀘스트 시 팀원들과 코드 리뷰를 진행했습니다 🔥
+
+
+#### [3] 이슈를 작성해 서로의 진행상황을 공유했습니다 👀
+
+
+<br/>
+
+## 6. 프로젝트 설치 및 실행 ✨
+
+<br/>
+
+1. Git Clone
+
+```plaintext
+git clone https://github.com/PreOnBoarding-Team17/Week2_Messenger.git
+```
+
+2. 프로젝트 패키지 설치
+
+```plaintext
+yarn install
+```
+
+3. 프로젝트 실행
+
+```plaintext
+yarn start
+```

@@ -1,7 +1,10 @@
-import React from "react";
+import React from 'react';
 
-function App() {
+import 'Utils/Styles/_reset.scss';
+import 'App.scss';
+
+const App = () => {
   return <div className="App"></div>;
-}
+};
 
 export default App;

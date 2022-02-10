@@ -10,6 +10,6 @@ export interface MessageInterface {
   id: number;
   user: UserInterface;
   content: string;
-  date: string; // "yyyy-mm-dd hh:MM:ss"
-  reply: ReplyType; // messageId (null)
+  date: string;
+  reply: ReplyType;
 }
