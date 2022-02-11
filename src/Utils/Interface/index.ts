@@ -41,3 +41,8 @@ export interface ReplyDataInterface {
   userName: string;
   message: string;
 }
+
+export interface DeleteModalDataInterface {
+  id: number;
+  message: string;
+}
