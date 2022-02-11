@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import Message from 'Components/MessageList/Message';
+import { DataInterface, MessageInterface } from 'Utils/Interface';
 import 'Components/MessageList/scss/MessageList.scss';
 
-const MessageList = () => {
+const MessageList: React.FC = () => {
+  const allMessages = useSelector((state: DataInterface) => state.allMessages);
+  allMessages.sort((a, b) => {
+    return Date.parse(a.date) - Date.parse(b.date);
+  });
+
+  const user = useSelector((state: DataInterface) => state.user);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({
+      behavior: 'smooth',
+    });
+  }, [allMessages]);
+
   return (
-    <section>
-      <h1>리스트</h1>
+    <section className="messageList">
+      {allMessages.map((message: MessageInterface) => (
+        <Message key={message.id} message={message} host={user} />
+      ))}
+      <div ref={messagesEndRef}></div>
     </section>
   );
 };
