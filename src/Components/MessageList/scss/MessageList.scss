@@ -1,0 +1,7 @@
+@import 'Utils/Styles/variables';
+
+.messageList {
+  overflow-y: scroll;
+  height: 55vh;
+  border-top: 1px solid $lightgray;
+}
