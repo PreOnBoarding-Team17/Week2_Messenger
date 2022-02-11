@@ -36,12 +36,13 @@ export interface DataInterface {
   allMessages: MessageInterface[];
 }
 
-export interface ModalInterface {
-  modals: ModalStateType;
-}
-
 export interface ReplyDataInterface {
   id: number;
   userName: string;
+  message: string;
+}
+
+export interface DeleteModalDataInterface {
+  id: number;
   message: string;
 }

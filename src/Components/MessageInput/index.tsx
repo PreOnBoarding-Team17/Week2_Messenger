@@ -3,6 +3,9 @@ import { useDispatch } from 'react-redux';
 import { replyMessage, sendMessage } from 'Store/Actions/message';
 import MessageTextArea from 'Components/MessageInput/MessageTextArea';
 import 'Components/MessageInput/scss/MessageInput.scss';
+import useTextarea from 'Utils/Hooks/useTextarea';
+import Button from 'Components/Common/Button';
+import CancelIcon from 'Assets/Delete.png';
 
 interface MessageInputProps {
   replyData: {
@@ -10,51 +13,36 @@ interface MessageInputProps {
     userName: string;
     message: string;
   };
+  userId: number | undefined | null;
 }
 
-const MessageInput: React.FC<MessageInputProps> = ({ replyData }) => {
-  const [message, setMessage] = useState<string>('');
+const MessageInput: React.FC<MessageInputProps> = ({ replyData, userId }) => {
+  const { message, setMessage, onChangeInput } = useTextarea();
   const [isReply, setIsReply] = useState<boolean>(false);
   const dispatch = useDispatch();
 
-  // userId 받아오는 로직 추가
-
-  // reply 하는 경우 messageId 받아오는 로직 추가
-  // messageId 받아오고 사용자이름, 메세지 내용 받아오기
-
   useEffect(() => {
-    if (replyData.id !== 0) {
-      onClickReply();
-    }
-  }, [replyData]);
-
-  const onChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    setMessage(e.target.value);
-  };
-
-  const onClickSend = useCallback((): void => {
-    console.log(message);
-
-    if (message) {
-      if (isReply) dispatch(replyMessage(3, message, replyData.id));
-      else dispatch(sendMessage(3, message));
-      setMessage('');
-      setIsReply(false);
-    }
-  }, [dispatch, message, isReply]);
-
-  const onClickReply = (): void => {
-    if (!isReply) {
-      // setMessage(`사용자 이름\n` + `메시지 내용\n` + `(회신)\n` + message);
+    if (replyData.id !== 0 && !isReply) {
       setMessage(
         `${replyData.userName}\n` +
           `${replyData.message}\n` +
           `(회신)\n` +
           message
       );
+      setIsReply(true);
     }
-    setIsReply(true);
-  };
+  }, [replyData]);
+
+  const onClickSend = useCallback((): void => {
+    console.log(message);
+
+    if (message && userId) {
+      if (isReply) dispatch(replyMessage(userId, message, replyData.id));
+      else dispatch(sendMessage(userId, message));
+      setMessage('');
+      setIsReply(false);
+    }
+  }, [dispatch, message, isReply]);
 
   const cancelReply = (): void => {
     setIsReply(false);
@@ -72,18 +60,16 @@ const MessageInput: React.FC<MessageInputProps> = ({ replyData }) => {
               className="message-input__left-menu__cancel-btn"
               onClick={cancelReply}
             >
-              reply 취소
+              <img src={CancelIcon} alt="답장 취소" />
             </button>
           )}
         </div>
-        <button
-          type="button"
-          className="message-input__send-btn"
-          onClick={onClickSend}
+        <Button
+          style="square"
+          text="보내기"
           disabled={!message}
-        >
-          보내기
-        </button>
+          onClick={onClickSend}
+        />
       </section>
     </>
   );

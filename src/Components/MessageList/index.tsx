@@ -1,21 +1,20 @@
 import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { usePrevious } from 'Utils/Hooks/UsePrevious';
-import {
-  DataInterface,
-  MessageInterface,
-  UserInterface,
-} from 'Utils/Interface';
-import { ReplyDataInterface } from 'Utils/Interface';
+import { MessageInterface, UserInterface } from 'Utils/Interface';
+import { ReplyDataInterface, DeleteModalDataInterface } from 'Utils/Interface';
 import Message from 'Components/MessageList/Message';
 import { RootStateType } from 'Store/Reducers';
 import 'Components/MessageList/scss/MessageList.scss';
-
 interface MessageListProps {
   setReplyData: (data: ReplyDataInterface) => void;
+  setDeleteModalData: (data: DeleteModalDataInterface) => void;
 }
 
-const MessageList: React.FC<MessageListProps> = ({ setReplyData }) => {
+const MessageList: React.FC<MessageListProps> = ({
+  setReplyData,
+  setDeleteModalData,
+}) => {
   const allMessages: MessageInterface[] = useSelector(
     (state: RootStateType) => state.message.allMessages
   );
@@ -49,6 +48,7 @@ const MessageList: React.FC<MessageListProps> = ({ setReplyData }) => {
             message={message}
             host={user}
             setReplyData={setReplyData}
+            setDeleteModalData={setDeleteModalData}
           />
         ))}
       <div ref={messagesEndRef}></div>

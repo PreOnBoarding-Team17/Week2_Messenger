@@ -14,6 +14,8 @@
 
   &__profile {
     img {
+      border-radius: 50%;
+      object-fit: cover;
       position: absolute;
       top: 16px;
       left: 24px;
@@ -44,9 +46,9 @@
     font-size: 13px;
     font-weight: 500;
   }
-  // &__content--reply {
-  //   margin-left: 16px;
-  // }
+  &__content--reply {
+    margin-left: 16px;
+  }
 
   &__btn {
     position: absolute;

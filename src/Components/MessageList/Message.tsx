@@ -1,26 +1,46 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { deleteMessage } from 'Store/Actions/message';
+import { useSelector, useDispatch } from 'react-redux';
+import { showModal, closeModal } from 'Store/Actions/modals';
 import { MessageInterface, UserInterface } from 'Utils/Interface';
-import { ReplyDataInterface } from 'Utils/Interface';
+import { ReplyDataInterface, DeleteModalDataInterface } from 'Utils/Interface';
+import { RootStateType } from 'Store/Reducers';
+import { ModalStateType } from 'Store/Reducers/modals';
 import 'Components/MessageList/scss/Message.scss';
 import Delete from 'Assets/Delete.png';
 import Reply from 'Assets/Reply.png';
+import Modal from 'Components/Common/Modal';
+import { deleteMessage } from 'Store/Actions/message';
 interface MessageProps {
   host: UserInterface | null;
   message: MessageInterface;
   setReplyData: (data: ReplyDataInterface) => void;
+  setDeleteModalData: (data: DeleteModalDataInterface) => void;
 }
 
-const Message: React.FC<MessageProps> = ({ message, host, setReplyData }) => {
+const Message: React.FC<MessageProps> = ({
+  message,
+  host,
+  setReplyData,
+  setDeleteModalData,
+}) => {
   const { id, user, content, date, reply } = message;
-  const dispatch = useDispatch();
+  const modal: ModalStateType = useSelector(
+    (state: RootStateType) => state.modals
+  );
 
+  const modalData: DeleteModalDataInterface = {
+    id,
+    message:
+      (content.length >= 10 ? content.slice(0, 10) + '...' : content) +
+      ' 메시지를 삭제하시겠습니까?',
+  };
   const isHost = user.userId && user.userId === host?.userId ? true : false;
+
+  const dispatch = useDispatch();
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    dispatch(deleteMessage(id));
+    setDeleteModalData(modalData);
   };
 
   const handleReply = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
