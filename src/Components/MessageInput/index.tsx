@@ -4,6 +4,7 @@ import { replyMessage, sendMessage } from 'Store/Actions/message';
 import MessageTextArea from 'Components/MessageInput/MessageTextArea';
 import 'Components/MessageInput/scss/MessageInput.scss';
 import useTextarea from 'Utils/Hooks/useTextarea';
+import Button from 'Components/Common/Button';
 
 interface MessageInputProps {
   replyData: {
@@ -61,14 +62,20 @@ const MessageInput: React.FC<MessageInputProps> = ({ replyData }) => {
             </button>
           )}
         </div>
-        <button
+        <Button
+          style="message"
+          text="보내기"
+          disabled={!message}
+          onClick={onClickSend}
+        />
+        {/* <button
           type="button"
           className="message-input__send-btn"
           onClick={onClickSend}
           disabled={!message}
         >
           보내기
-        </button>
+        </button> */}
       </section>
     </>
   );
