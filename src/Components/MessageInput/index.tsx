@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { replyMessage, sendMessage } from 'Store/Actions';
+import { replyMessage, sendMessage } from 'Store/Actions/message';
 import MessageTextArea from 'Components/MessageInput/MessageTextArea';
 import 'Components/MessageInput/scss/MessageInput.scss';
 

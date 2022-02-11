@@ -1,21 +1,25 @@
 import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Message from 'Components/MessageList/Message';
-import { DataInterface, MessageInterface } from 'Utils/Interface';
+import { MessageInterface } from 'Utils/Interface';
 import 'Components/MessageList/scss/MessageList.scss';
 import { ReplyDataInterface } from 'Utils/Interface';
+import { RootStateType } from 'Store/Reducers';
 
 interface MessageListProps {
   setReplyData: (data: ReplyDataInterface) => void;
 }
 
 const MessageList: React.FC<MessageListProps> = ({ setReplyData }) => {
-  const allMessages = useSelector((state: DataInterface) => state.allMessages);
-  allMessages.sort((a, b) => {
-    return Date.parse(a.date) - Date.parse(b.date);
-  });
+  const allMessages = useSelector(
+    (state: RootStateType) => state.message.allMessages
+  );
+  allMessages &&
+    allMessages.sort((a, b) => {
+      return Date.parse(a.date) - Date.parse(b.date);
+    });
 
-  const user = useSelector((state: DataInterface) => state.user);
+  const user = useSelector((state: RootStateType) => state.message.user);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,14 +30,15 @@ const MessageList: React.FC<MessageListProps> = ({ setReplyData }) => {
 
   return (
     <section className="messageList">
-      {allMessages.map((message: MessageInterface) => (
-        <Message
-          key={message.id}
-          message={message}
-          host={user}
-          setReplyData={setReplyData}
-        />
-      ))}
+      {allMessages &&
+        allMessages.map((message: MessageInterface) => (
+          <Message
+            key={message.id}
+            message={message}
+            host={user}
+            setReplyData={setReplyData}
+          />
+        ))}
       <div ref={messagesEndRef}></div>
     </section>
   );
