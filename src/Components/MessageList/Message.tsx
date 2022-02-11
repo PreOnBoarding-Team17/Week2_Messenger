@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteMessage } from 'Store/Actions/message';
 import { MessageInterface, UserInterface } from 'Utils/Interface';
 import { ReplyDataInterface } from 'Utils/Interface';
 import 'Components/MessageList/scss/Message.scss';
@@ -13,15 +15,14 @@ interface MessageProps {
 
 const Message: React.FC<MessageProps> = ({ message, host, setReplyData }) => {
   const { id, user, content, date, reply } = message;
-  console.log(reply);
+  const dispatch = useDispatch();
 
   const isHost = user.userId && user.userId === host?.userId ? true : false;
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
+    dispatch(deleteMessage(id));
   };
-
-  console.log(content);
 
   const handleReply = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -49,7 +50,12 @@ const Message: React.FC<MessageProps> = ({ message, host, setReplyData }) => {
           <div className="message__profile--header-date"> {date}</div>
         </div>
       </div>
-      <div className="message__content">{content}</div>
+      <div
+        className="message__content"
+        dangerouslySetInnerHTML={{
+          __html: content.replace(/\r\n|\r|\n/g, '<br />'),
+        }}
+      ></div>
       <div className="message__btn">
         {isHost && (
           <button type="button" onClick={handleDelete}>
