@@ -4,12 +4,14 @@ interface MessageInputProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onKeyEnter: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  textareaRef: React.RefObject<HTMLTextAreaElement>;
 }
 
 const MessageTextArea: React.FC<MessageInputProps> = ({
   value,
   onChange,
   onKeyEnter,
+  textareaRef,
 }) => {
   return (
     <textarea
@@ -19,6 +21,7 @@ const MessageTextArea: React.FC<MessageInputProps> = ({
       onChange={onChange}
       value={value}
       onKeyPress={onKeyEnter}
+      ref={textareaRef}
     />
   );
 };
