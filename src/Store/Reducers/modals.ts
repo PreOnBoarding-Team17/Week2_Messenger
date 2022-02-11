@@ -11,8 +11,8 @@ const INITIAL_STATE: ModalStateType = {
 };
 
 const modals = createReducer<ModalStateType, ModalActionType>(INITIAL_STATE, {
-  [SHOW_MODAL]: (state: ModalStateType) => ({ showModal: !state }),
-  [CLOSE_MODAL]: (state: ModalStateType) => ({ showModal: !state }),
+  [SHOW_MODAL]: () => ({ showModal: true }),
+  [CLOSE_MODAL]: () => ({ showModal: false }),
 });
 
 export default modals;

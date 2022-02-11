@@ -10,6 +10,7 @@ import { RootStateType } from 'Store/Reducers';
 
 const MessengerContainer = () => {
   const modal = useSelector((state: RootStateType) => state.modals);
+  const userData = useSelector((state: RootStateType) => state.message.user);
 
   const [replyData, setReplyData] = useState<ReplyDataInterface>({
     id: 0,
@@ -18,9 +19,9 @@ const MessengerContainer = () => {
   });
   return (
     <main className="messenger-container">
-      <MessengerHeader />
+      <MessengerHeader userId={userData?.userId} />
       <MessageList setReplyData={setReplyData} />
-      <MessageInput replyData={replyData} />
+      <MessageInput replyData={replyData} userId={userData?.userId} />
       {modal.showModal && <MessengerLogin />}
     </main>
   );

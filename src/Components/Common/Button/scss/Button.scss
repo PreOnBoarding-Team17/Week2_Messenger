@@ -8,7 +8,7 @@
   transition: 0.3s;
 }
 
-.message {
+.square {
   width: 88px;
   height: 88px;
   border-radius: 13px;
@@ -19,6 +19,11 @@
   }
   &:active {
     background-color: #ade9de;
+  }
+  &:disabled {
+    user-select: none;
+    pointer-events: none;
+    background-color: $gray;
   }
 }
 
