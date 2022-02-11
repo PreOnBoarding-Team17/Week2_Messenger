@@ -39,9 +39,18 @@ const MessageList: React.FC<MessageListProps> = ({
       });
   }, [allMessages]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      messagesEndRef.current?.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }, 2000);
+  }, []);
+
   return (
     <section className="message-list">
-      {allMessages &&
+      {user &&
+        allMessages &&
         allMessages.map((message: MessageInterface) => (
           <Message
             key={message.id}
