@@ -1,0 +1,23 @@
+@import '../../../Utils/Styles/variables';
+
+.messanger-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 110px;
+  background-color: $background;
+  border-radius: 20px 20px 0 0;
+  padding: 0 32px;
+  box-sizing: border-box;
+
+  &__logo {
+    width: 142px;
+    height: 45px;
+
+    & img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
