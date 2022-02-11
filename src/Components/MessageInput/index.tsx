@@ -5,6 +5,7 @@ import MessageTextArea from 'Components/MessageInput/MessageTextArea';
 import 'Components/MessageInput/scss/MessageInput.scss';
 import useTextarea from 'Utils/Hooks/useTextarea';
 import Button from 'Components/Common/Button';
+import CancelIcon from 'Assets/Delete.png';
 
 interface MessageInputProps {
   replyData: {
@@ -12,9 +13,10 @@ interface MessageInputProps {
     userName: string;
     message: string;
   };
+  userId: number | undefined | null;
 }
 
-const MessageInput: React.FC<MessageInputProps> = ({ replyData }) => {
+const MessageInput: React.FC<MessageInputProps> = ({ replyData, userId }) => {
   const { message, setMessage, onChangeInput } = useTextarea();
   const [isReply, setIsReply] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -34,9 +36,9 @@ const MessageInput: React.FC<MessageInputProps> = ({ replyData }) => {
   const onClickSend = useCallback((): void => {
     console.log(message);
 
-    if (message) {
-      if (isReply) dispatch(replyMessage(3, message, replyData.id));
-      else dispatch(sendMessage(3, message));
+    if (message && userId) {
+      if (isReply) dispatch(replyMessage(userId, message, replyData.id));
+      else dispatch(sendMessage(userId, message));
       setMessage('');
       setIsReply(false);
     }
@@ -58,7 +60,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ replyData }) => {
               className="message-input__left-menu__cancel-btn"
               onClick={cancelReply}
             >
-              reply 취소
+              <img src={CancelIcon} alt="답장 취소" />
             </button>
           )}
         </div>
