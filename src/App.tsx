@@ -1,14 +1,14 @@
 import React, { useCallback, useState } from 'react';
 import 'Utils/Styles/_reset.scss';
 import { useDispatch } from 'react-redux';
-import { sendMessage } from 'Store/Actions';
+import { replyMessage } from 'Store/Actions';
 import 'App.scss';
 
 const App = () => {
   const [input, setInput] = useState('');
   const dispatch = useDispatch();
   const onSubmit = useCallback(() => {
-    dispatch(sendMessage(3, input));
+    dispatch(replyMessage(3, input, 1));
   }, [dispatch, input]);
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {

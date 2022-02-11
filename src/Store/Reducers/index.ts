@@ -1,6 +1,4 @@
 import { createReducer } from 'typesafe-actions';
-import { UserInterface, MessageInterface } from 'Utils/Interface';
-import { MessengerAction } from 'Store/Actions';
 import {
   SEND_MESSAGE,
   DELETE_MESSAGE,
@@ -8,26 +6,20 @@ import {
   LOGIN_USER,
   LOGOUT_USER,
 } from 'Store/Actions/types';
+import { MessengerAction } from 'Store/Actions';
+import { UserInterface, MessageInterface } from 'Utils/Interface';
 import { SAMPLEUSER, SAMPLEMESSAGE } from 'Utils/Constant';
+import {
+  SendMessageActionInterface,
+  ReplyMessageActionInterface,
+  LoginUserActionInterface,
+  NumberActionInterface,
+} from 'Store/Reducers/types';
 
 interface DataInterface {
   user: UserInterface | null;
   allUsers: UserInterface[];
   allMessages: MessageInterface[];
-}
-
-interface MessagePayload {
-  id: number;
-  userId: number;
-  content: string;
-  data: string;
-}
-interface SendMessagePayload extends MessagePayload {
-  reply: null;
-}
-
-interface ReplyMessagePayload extends MessagePayload {
-  replyMessageId: number;
 }
 
 const initialState: DataInterface = {
@@ -39,7 +31,7 @@ const initialState: DataInterface = {
 const reducer = createReducer<DataInterface, MessengerAction>(initialState, {
   [SEND_MESSAGE]: (
     state: DataInterface,
-    { payload }: { text: string; payload: SendMessagePayload }
+    { payload }: SendMessageActionInterface
   ) => ({
     ...state,
     allMessages: [
@@ -52,8 +44,10 @@ const reducer = createReducer<DataInterface, MessengerAction>(initialState, {
   }),
   [REPLY_MESSAGE]: (
     state: DataInterface,
-    { payload }: { text: string; payload: ReplyMessagePayload }
+    { payload }: ReplyMessageActionInterface
   ) => {
+    const { replyMessageId, ...filterPayload } = payload;
+
     const filterUser = (userId: number) => {
       const result = state.allUsers.filter((user) => user.userId === userId);
       return result[0];
@@ -65,28 +59,29 @@ const reducer = createReducer<DataInterface, MessengerAction>(initialState, {
       );
       return result[0];
     };
+
     return {
       ...state,
       allMessages: [
         ...state.allMessages,
         {
-          ...payload,
-          user: filterUser(payload.userId),
-          reply: filterMessage(payload.id),
+          ...filterPayload,
+          user: filterUser(filterPayload.userId),
+          reply: filterMessage(replyMessageId),
         },
       ],
     };
   },
   [DELETE_MESSAGE]: (
     state: DataInterface,
-    { payload }: { type: string; payload: number }
+    { payload }: NumberActionInterface
   ) => ({
     ...state,
     allMessages: state.allMessages.filter((message) => message.id !== payload),
   }),
   [LOGIN_USER]: (
     state: DataInterface,
-    { payload }: { type: string; payload: UserInterface }
+    { payload }: LoginUserActionInterface
   ) => ({
     ...state,
     user: payload,
@@ -94,7 +89,7 @@ const reducer = createReducer<DataInterface, MessengerAction>(initialState, {
   }),
   [LOGOUT_USER]: (
     state: DataInterface,
-    { payload }: { type: string; payload: number }
+    { payload }: NumberActionInterface
   ) => ({
     ...state,
     user: null,

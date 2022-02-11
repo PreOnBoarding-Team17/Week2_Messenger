@@ -13,3 +13,17 @@ export interface MessageInterface {
   date: string;
   reply: ReplyType;
 }
+
+export interface MessagePayloadInterface {
+  id: number;
+  userId: number;
+  content: string;
+  data: string;
+}
+export interface SendMessagePayloadInterface extends MessagePayloadInterface {
+  reply: null;
+}
+
+export interface ReplyMessagePayloadInterface extends MessagePayloadInterface {
+  replyMessageId: number;
+}
