@@ -7,7 +7,7 @@ import {
   LOGOUT_USER,
 } from 'Store/Actions/types';
 import { MessengerAction } from 'Store/Actions';
-import { UserInterface, MessageInterface } from 'Utils/Interface';
+import { DataInterface } from 'Utils/Interface';
 import { SAMPLEUSER, SAMPLEMESSAGE } from 'Utils/Constant';
 import {
   SendMessageActionInterface,
@@ -15,12 +15,6 @@ import {
   LoginUserActionInterface,
   NumberActionInterface,
 } from 'Store/Reducers/types';
-
-interface DataInterface {
-  user: UserInterface | null;
-  allUsers: UserInterface[];
-  allMessages: MessageInterface[];
-}
 
 const initialState: DataInterface = {
   user: null,

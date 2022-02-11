@@ -1,0 +1,62 @@
+@import 'Utils/Styles/variables';
+
+.message {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100px;
+  border-bottom: 1px solid $lightgray;
+  padding: 24px 80px 24px 110px;
+  overflow-y: hidden;
+
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &__profile {
+    img {
+      position: absolute;
+      top: 16px;
+      left: 24px;
+      width: 60px;
+      height: 60px;
+    }
+    &--header {
+      display: flex;
+      margin-bottom: 8px;
+      &-name {
+        font-weight: 700;
+        margin-right: 16px;
+      }
+      &-date {
+        color: $lightgray;
+        padding-top: 6px;
+        font-size: 10px;
+      }
+    }
+  }
+  &__content {
+    line-height: 1.5;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  &__btn {
+    position: absolute;
+    right: 2.5%;
+    bottom: 7.5%;
+    display: flex;
+    align-items: center;
+    button {
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+
+      img {
+        height: 24px;
+      }
+    }
+  }
+}
+
+.host {
+  background-color: #f3f7ff;
+}
