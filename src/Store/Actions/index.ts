@@ -1,5 +1,5 @@
 import { createAction, createCustomAction, ActionType } from 'typesafe-actions';
-import { formatDate } from 'Utils/Constant/';
+import { formatDate, PROFILELIST } from 'Utils/Constant/';
 import {
   SEND_MESSAGE,
   DELETE_MESSAGE,
@@ -44,16 +44,13 @@ export const replyMessage = createCustomAction(
 export const deleteMessage = createAction(DELETE_MESSAGE)<number>();
 
 // 로그인
-export const loginUser = createCustomAction(
-  LOGIN_USER,
-  (userName: string, profileImage: string) => ({
-    payload: {
-      userId: USER_ID++,
-      userName,
-      profileImage,
-    },
-  })
-);
+export const loginUser = createCustomAction(LOGIN_USER, (userName: string) => ({
+  payload: {
+    userId: USER_ID++,
+    userName,
+    profileImage: PROFILELIST[Math.floor(Math.random() * PROFILELIST.length)],
+  },
+}));
 
 // 로그아웃
 export const logoutUser = createAction(LOGOUT_USER)<number>();
