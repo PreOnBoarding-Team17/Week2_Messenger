@@ -1,0 +1,46 @@
+@import '../../../../Utils/Styles/variables';
+
+.button {
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  border: none;
+  color: $green;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.message {
+  width: 88px;
+  height: 88px;
+  border-radius: 13px;
+  background-color: $lightgreen;
+  &:hover {
+    background-color: #beece4;
+    transition: 0.3s;
+  }
+  &:active {
+    background-color: #ade9de;
+  }
+}
+
+.standard {
+  width: 114px;
+  height: 35px;
+  border-radius: 17.5px;
+  background-color: $lightgreen;
+  &:hover {
+    transform: scale(1.03);
+    transition: 0.4s;
+  }
+}
+
+.border {
+  background-color: white;
+  border: 1px solid $lightgreen;
+  margin-right: 10px;
+}
+
+.disabled {
+  user-select: none;
+  pointer-events: none;
+  background-color: $gray;
+}

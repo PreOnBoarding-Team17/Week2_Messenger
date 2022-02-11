@@ -1,0 +1,20 @@
+@import '../../../Utils/Styles/mixins';
+@import '../../../Utils/Styles/variables';
+
+.login {
+  @include modal();
+  &__message {
+    margin-top: 50px;
+  }
+  &__input {
+    margin: 40px 0;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    padding: 0 0 5px 5px;
+    &:focus {
+      transition: 0.5s;
+      border-bottom: 1px solid $lightgreen;
+    }
+  }
+}

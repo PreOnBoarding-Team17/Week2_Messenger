@@ -1,96 +1,12 @@
-import { createReducer } from 'typesafe-actions';
-import {
-  SEND_MESSAGE,
-  DELETE_MESSAGE,
-  REPLY_MESSAGE,
-  LOGIN_USER,
-  LOGOUT_USER,
-} from 'Store/Actions/types';
-import { MessengerAction } from 'Store/Actions';
-import { DataInterface } from 'Utils/Interface';
-import { SAMPLEUSER, SAMPLEMESSAGE } from 'Utils/Constant';
-import {
-  SendMessageActionInterface,
-  ReplyMessageActionInterface,
-  LoginUserActionInterface,
-  NumberActionInterface,
-} from 'Store/Reducers/types';
+import { combineReducers } from 'redux';
+import modals from 'Store/Reducers/modals';
+import message from 'Store/Reducers/message';
 
-const initialState: DataInterface = {
-  user: null,
-  allUsers: SAMPLEUSER,
-  allMessages: SAMPLEMESSAGE,
-};
-
-const reducer = createReducer<DataInterface, MessengerAction>(initialState, {
-  [SEND_MESSAGE]: (
-    state: DataInterface,
-    { payload }: SendMessageActionInterface
-  ) => ({
-    ...state,
-    allMessages: [
-      ...state.allMessages,
-      {
-        ...payload,
-        user: state.allUsers.filter(
-          (user) => user.userId === payload.userId
-        )[0],
-      },
-    ],
-  }),
-  [REPLY_MESSAGE]: (
-    state: DataInterface,
-    { payload }: ReplyMessageActionInterface
-  ) => {
-    const { replyMessageId, ...filterPayload } = payload;
-
-    const filterUser = (userId: number) => {
-      const result = state.allUsers.filter((user) => user.userId === userId);
-      return result[0];
-    };
-
-    const filterMessage = (messageId: number) => {
-      const result = state.allMessages.filter(
-        (message) => message.id === messageId
-      );
-      return result[0];
-    };
-
-    return {
-      ...state,
-      allMessages: [
-        ...state.allMessages,
-        {
-          ...filterPayload,
-          user: filterUser(filterPayload.userId),
-          reply: filterMessage(replyMessageId),
-        },
-      ],
-    };
-  },
-  [DELETE_MESSAGE]: (
-    state: DataInterface,
-    { payload }: NumberActionInterface
-  ) => ({
-    ...state,
-    allMessages: state.allMessages.filter((message) => message.id !== payload),
-  }),
-  [LOGIN_USER]: (
-    state: DataInterface,
-    { payload }: LoginUserActionInterface
-  ) => ({
-    ...state,
-    user: payload,
-    allUsers: [...state.allUsers, payload],
-  }),
-  [LOGOUT_USER]: (
-    state: DataInterface,
-    { payload }: NumberActionInterface
-  ) => ({
-    ...state,
-    user: null,
-    allUsers: state.allUsers.filter((user) => user.userId !== payload),
-  }),
+const rootReducer = combineReducers({
+  modals,
+  message,
 });
 
-export default reducer;
+export default rootReducer;
+
+export type RootStateType = ReturnType<typeof rootReducer>;

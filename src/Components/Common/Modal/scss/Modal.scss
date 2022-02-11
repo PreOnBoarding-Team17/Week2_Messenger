@@ -1,0 +1,17 @@
+@import '../../../../Utils/Styles/mixins';
+
+.modal {
+  &__wrapper {
+    @include modal();
+  }
+  &__message {
+    margin: 55px 0 40px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    > p {
+      margin-top: 10px;
+    }
+  }
+}
