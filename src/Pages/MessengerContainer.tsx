@@ -4,12 +4,12 @@ import MessageList from 'Components/MessageList';
 import MessageInput from 'Components/MessageInput';
 import MessengerLogin from 'Components/MessengerLogin';
 import { useSelector } from 'react-redux';
-import { ModalInterface } from 'Utils/Interface';
 import 'Pages/scss/MessengerContainer.scss';
 import { ReplyDataInterface } from 'Utils/Interface';
+import { RootStateType } from 'Store/Reducers';
 
 const MessengerContainer = () => {
-  const modal = useSelector((state: ModalInterface) => state.modals);
+  const modal = useSelector((state: RootStateType) => state.modals);
 
   const [replyData, setReplyData] = useState<ReplyDataInterface>({
     id: 0,
