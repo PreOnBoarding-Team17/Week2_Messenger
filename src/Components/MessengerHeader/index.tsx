@@ -24,7 +24,9 @@ const MessengerHeader: React.FC<MessengerHeaderProps> = ({ userId }) => {
       <div className="messanger-header__logo">
         <img src={LogoImage} alt="logo" />
       </div>
-      <Button style="standard" text="로그아웃" onClick={onClickLogout} />
+      {userId && (
+        <Button style="standard" text="로그아웃" onClick={onClickLogout} />
+      )}
     </section>
   );
 };

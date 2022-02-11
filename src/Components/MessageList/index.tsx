@@ -27,7 +27,6 @@ const MessageList: React.FC<MessageListProps> = ({ setReplyData }) => {
       behavior: 'smooth',
     });
   }, [allMessages]);
-  console.log(allMessages);
 
   return (
     <section className="messageList">
