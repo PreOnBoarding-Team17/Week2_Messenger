@@ -51,6 +51,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ replyData, userId }) => {
 
   const cancelReply = (): void => {
     setIsReply(false);
+    setMessage('');
   };
 
   const onKeyEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
