@@ -6,7 +6,6 @@ import { ReplyDataInterface } from 'Utils/Interface';
 import 'Components/MessageList/scss/Message.scss';
 import Delete from 'Assets/Delete.png';
 import Reply from 'Assets/Reply.png';
-
 interface MessageProps {
   host: UserInterface | null;
   message: MessageInterface;
@@ -47,11 +46,15 @@ const Message: React.FC<MessageProps> = ({ message, host, setReplyData }) => {
             {user.userName}
             {isHost && '* '}
           </div>
+
           <div className="message__profile--header-date"> {date}</div>
         </div>
       </div>
+      {reply && <div className="message__reply">Reply Message</div>}
       <div
-        className="message__content"
+        className={
+          'message__content' + (reply ? ' message__content--reply' : '')
+        }
         dangerouslySetInnerHTML={{
           __html: content.replace(/\r\n|\r|\n/g, '<br />'),
         }}

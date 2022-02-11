@@ -34,11 +34,20 @@
       }
     }
   }
+  &__reply {
+    font-size: 14px;
+    color: $lightgray;
+    margin-bottom: 8px;
+  }
   &__content {
     line-height: 1.5;
     font-size: 13px;
     font-weight: 500;
   }
+  // &__content--reply {
+  //   margin-left: 16px;
+  // }
+
   &__btn {
     position: absolute;
     right: 2.5%;

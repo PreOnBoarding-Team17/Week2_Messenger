@@ -1,11 +1,14 @@
 import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { usePrevious } from 'Utils/Hooks/UsePrevious';
-import { MessageInterface } from 'Utils/Interface';
+import {
+  DataInterface,
+  MessageInterface,
+  UserInterface,
+} from 'Utils/Interface';
 import { ReplyDataInterface } from 'Utils/Interface';
 import Message from 'Components/MessageList/Message';
 import { RootStateType } from 'Store/Reducers';
-import { ModalStateType } from 'Store/Reducers/modals';
 import 'Components/MessageList/scss/MessageList.scss';
 
 interface MessageListProps {
@@ -22,10 +25,8 @@ const MessageList: React.FC<MessageListProps> = ({ setReplyData }) => {
       return Date.parse(a.date) - Date.parse(b.date);
     });
 
-  const user = useSelector((state: RootStateType) => state.message.user);
-
-  const modal: ModalStateType = useSelector(
-    (state: RootStateType) => state.modals
+  const user: UserInterface | null = useSelector(
+    (state: RootStateType) => state.message.user
   );
 
   const prevAllMessagesLen = usePrevious<number>(allMessages.length);
