@@ -4,7 +4,7 @@ import 'Components/Common/Button/scss/Button.scss';
 interface ButtonProps {
   style: string;
   text: string;
-  disabled: boolean;
+  disabled?: boolean;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
