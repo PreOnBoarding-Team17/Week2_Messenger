@@ -1,3 +1,5 @@
+import { ModalStateType } from 'Store/Reducers/modals';
+
 export type ReplyType = null | MessageInterface;
 
 export interface UserInterface {
@@ -32,4 +34,8 @@ export interface DataInterface {
   user: UserInterface | null;
   allUsers: UserInterface[];
   allMessages: MessageInterface[];
+}
+
+export interface ModalInterface {
+  modals: ModalStateType;
 }
