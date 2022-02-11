@@ -4,17 +4,12 @@ import 'Components/Common/Button/scss/Button.scss';
 interface ButtonProps {
   style: string;
   text: string;
-  disabled?: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button = ({ style, text, disabled, onClick }: ButtonProps) => {
+const Button = ({ style, text, onClick }: ButtonProps) => {
   return (
-    <button
-      className={`button ${style} ${disabled}`}
-      type="button"
-      onClick={onClick}
-    >
+    <button className={`button ${style}`} type="button" onClick={onClick}>
       {text}
     </button>
   );
