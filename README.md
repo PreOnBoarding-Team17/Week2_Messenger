@@ -134,7 +134,7 @@ src
 
 ### [2] 풀 리퀘스트 시 팀원들과 코드 리뷰를 진행했습니다 🔥
 
-[풀리퀘스트 링크](https://github.com/PreOnBoarding-Team17/Week2_Dashboard/pulls?q=is%3Apr+is%3Aclosed)
+[풀리퀘스트 링크](https://github.com/PreOnBoarding-Team17/Week2_Messenger/pulls?q=is%3Apr+is%3Aclosed)
 
 ![스크린샷 2022-02-12 오전 1 13 23](https://user-images.githubusercontent.com/98322239/153627577-29072bdc-4800-41e8-bdd3-e1d6d2b1480a.png)
 
@@ -142,7 +142,7 @@ src
 
 ### [3] 이슈를 작성해 서로의 진행상황을 공유했습니다 👀
 
-[이슈 링크](https://github.com/PreOnBoarding-Team17/Week2_Dashboard/issues)
+[이슈 링크](https://github.com/PreOnBoarding-Team17/Week2_Messenger/issues)
 
 ![스크린샷 2022-02-12 오전 1 14 01](https://user-images.githubusercontent.com/98322239/153627606-fa39c9ff-e6ba-46ce-8d2d-e9539926e5e9.png)
 
