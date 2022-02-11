@@ -1,8 +1,15 @@
 // 전역 스타일
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;600;700;800;900&display=swap');
+@import '../src/Utils/Styles/variables';
 
 body {
   font-family: 'Noto Sans KR';
   -ms-overflow-style: none;
   font-weight: 400;
+  background-color: $background;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
