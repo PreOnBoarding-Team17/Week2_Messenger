@@ -3,7 +3,7 @@
 .messenger-container {
   background-color: white;
   width: 550px;
-  height: 80vh;
+  // height: 80vh;
   border-radius: 20px;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
   @include responsive(mobile) {

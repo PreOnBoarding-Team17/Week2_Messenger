@@ -39,3 +39,9 @@ export interface DataInterface {
 export interface ModalInterface {
   modals: ModalStateType;
 }
+
+export interface ReplyDataInterface {
+  id: number;
+  userName: string;
+  message: string;
+}
