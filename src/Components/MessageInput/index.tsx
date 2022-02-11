@@ -1,18 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { replyMessage, sendMessage } from 'Store/Actions';
 import 'Components/MessageInput/scss/MessageInput.scss';
 
 const MessageInput = () => {
   const [message, setMessage] = useState<string>('');
   const [isReply, setIsReply] = useState<boolean>(false);
+  const dispatch = useDispatch();
+
+  // userId 받아오는 로직 추가
+
+  // reply 하는 경우 messageId 받아오는 로직 추가
 
   const onChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setMessage(e.target.value);
   };
 
-  const onClickSend = (): void => {
+  const onClickSend = useCallback((): void => {
     console.log(message);
-    setMessage('');
-  };
+
+    if (message) {
+      if (isReply) dispatch(replyMessage(4, message, 1));
+      else dispatch(sendMessage(4, message));
+      setMessage('');
+      setIsReply(false);
+    }
+  }, [dispatch, message, isReply]);
 
   const onClickReply = (): void => {
     if (!isReply) {
@@ -41,6 +54,7 @@ const MessageInput = () => {
           type="button"
           className="message-input__send-btn"
           onClick={onClickSend}
+          disabled={!message}
         >
           보내기
         </button>
