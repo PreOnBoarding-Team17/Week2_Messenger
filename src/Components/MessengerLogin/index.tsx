@@ -2,8 +2,8 @@ import React, { useCallback, useState } from 'react';
 import { closeModal } from 'Store/Actions/modals';
 import { loginUser } from 'Store/Actions/message';
 import { useDispatch } from 'react-redux';
-import Button from 'Components/Common/Button';
 import 'Components/MessengerLogin/scss/MessengerLogin.scss';
+import Modal from 'Components/Common/Modal';
 
 const MessengerLogin = () => {
   const [input, setInput] = useState('');
@@ -22,19 +22,14 @@ const MessengerLogin = () => {
   };
 
   return (
-    <div className="modal">
-      <div className="modal__container">
-        <div className="login">
-          <p className="login__message">사용할 닉네임을 입력해주세요.</p>
-          <input
-            className="login__input"
-            type="text"
-            onChange={onChangeInput}
-          />
-          <Button style="standard" text="확인" onClick={handleClick} />
-        </div>
-      </div>
-    </div>
+    <>
+      <Modal
+        onChange={onChangeInput}
+        onSubmit={handleClick}
+        question="사용할 닉네임을 입력해주세요."
+        type="login"
+      />
+    </>
   );
 };
 
