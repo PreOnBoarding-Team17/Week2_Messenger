@@ -33,3 +33,9 @@ export interface DataInterface {
   allUsers: UserInterface[];
   allMessages: MessageInterface[];
 }
+
+export interface ReplyDataInterface {
+  id: number;
+  userName: string;
+  message: string;
+}

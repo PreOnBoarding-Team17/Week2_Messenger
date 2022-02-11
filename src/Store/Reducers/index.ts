@@ -32,7 +32,9 @@ const reducer = createReducer<DataInterface, MessengerAction>(initialState, {
       ...state.allMessages,
       {
         ...payload,
-        ...state.allUsers.filter((user) => user.userId === payload.userId)[0],
+        user: state.allUsers.filter(
+          (user) => user.userId === payload.userId
+        )[0],
       },
     ],
   }),

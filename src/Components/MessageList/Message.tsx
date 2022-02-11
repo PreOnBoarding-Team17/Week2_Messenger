@@ -1,5 +1,6 @@
 import React from 'react';
 import { MessageInterface, UserInterface } from 'Utils/Interface';
+import { ReplyDataInterface } from 'Utils/Interface';
 import 'Components/MessageList/scss/Message.scss';
 import Delete from 'Assets/Delete.png';
 import Reply from 'Assets/Reply.png';
@@ -7,22 +8,29 @@ import Reply from 'Assets/Reply.png';
 interface MessageProps {
   host: UserInterface | null;
   message: MessageInterface;
+  setReplyData: (data: ReplyDataInterface) => void;
 }
 
-const Message: React.FC<MessageProps> = ({ message, host }) => {
+const Message: React.FC<MessageProps> = ({ message, host, setReplyData }) => {
   const { id, user, content, date, reply } = message;
   console.log(reply);
 
-  const isHost = user.userId === host?.userId ? true : false;
+  const isHost = user.userId && user.userId === host?.userId ? true : false;
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    console.log(id);
   };
+
+  console.log(content);
 
   const handleReply = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    console.log(id);
+    const data: ReplyDataInterface = {
+      id,
+      userName: user.userName,
+      message: content,
+    };
+    setReplyData(data);
   };
 
   return (
