@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { replyMessage, sendMessage } from 'Store/Actions/message';
 import MessageTextArea from 'Components/MessageInput/MessageTextArea';
@@ -20,6 +20,14 @@ const MessageInput: React.FC<MessageInputProps> = ({ replyData, userId }) => {
   const { message, setMessage, onChangeInput } = useTextarea();
   const [isReply, setIsReply] = useState<boolean>(false);
   const dispatch = useDispatch();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (userId) {
+      textareaRef.current?.focus();
+    }
+    console.log('effect');
+  }, [userId]);
 
   useEffect(() => {
     if (replyData.id !== 0 && !isReply) {
@@ -34,18 +42,24 @@ const MessageInput: React.FC<MessageInputProps> = ({ replyData, userId }) => {
   }, [replyData]);
 
   const onClickSend = useCallback((): void => {
-    console.log(message);
-
-    if (message && userId) {
+    if (message.trim() && userId) {
       if (isReply) dispatch(replyMessage(userId, message, replyData.id));
       else dispatch(sendMessage(userId, message));
-      setMessage('');
       setIsReply(false);
     }
+    setMessage('');
   }, [dispatch, message, isReply]);
 
   const cancelReply = (): void => {
     setIsReply(false);
+  };
+
+  const onKeyEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
+    if (message && e.key === 'Enter') {
+      setTimeout(() => {
+        onClickSend();
+      }, 200);
+    }
   };
 
   return (
@@ -53,7 +67,12 @@ const MessageInput: React.FC<MessageInputProps> = ({ replyData, userId }) => {
       <section className="message-input">
         <div className="message-input__left-menu">
           <div className="message-input__left-menu__textarea">
-            <MessageTextArea value={message} onChange={onChangeInput} />
+            <MessageTextArea
+              value={message}
+              onChange={onChangeInput}
+              onKeyEnter={onKeyEnter}
+              textareaRef={textareaRef}
+            />
           </div>
           {isReply && (
             <button

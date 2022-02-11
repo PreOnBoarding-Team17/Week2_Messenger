@@ -13,47 +13,44 @@ export const formatDate = (): string => {
 };
 
 export const SAMPLEUSER = [
-  { userId: 1, userName: 'John', profileImage: Profile1 },
-  { userId: 2, userName: 'Alice', profileImage: Profile2 },
-  { userId: 3, userName: 'Tom', profileImage: Profile3 },
+  { userId: 1, userName: '인권', profileImage: Profile1 },
+  { userId: 2, userName: '다솜', profileImage: Profile2 },
+  { userId: 3, userName: '상섭', profileImage: Profile3 },
 ];
 
 export const SAMPLEMESSAGE = [
   {
     id: 1,
     user: SAMPLEUSER[0],
-    content: 'Hello, world!',
+    content: '네!!!',
     date: formatDate(),
     reply: null,
   },
   {
     id: 2,
     user: SAMPLEUSER[1],
-    content:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ',
-    date: formatDate(),
+    content: '저희 그럼 회의 진행할까요??',
+    date: '2022-02-11 16:42:31',
     reply: null,
   },
   {
     id: 3,
-    user: SAMPLEUSER[2],
-    content:
-      'Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,',
+    user: SAMPLEUSER[0],
+    content: '어서오세요~',
     date: '2022-02-11 16:32:31',
     reply: null,
   },
   {
     id: 4,
     user: SAMPLEUSER[2],
-    content: 'Hello',
+    content: `반갑습니다. 😄`,
     date: '2022-02-11 13:32:31',
     reply: null,
   },
   {
     id: 5,
     user: SAMPLEUSER[1],
-    content:
-      'Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. ',
+    content: `안녕하세요 저는 ${SAMPLEUSER[1].userName}이라고 합니다. `,
     date: '2022-02-11 06:32:31',
     reply: null,
   },
