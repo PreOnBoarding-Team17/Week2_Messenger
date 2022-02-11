@@ -11,6 +11,7 @@ import { RootStateType } from 'Store/Reducers';
 import { ModalStateType } from 'Store/Reducers/modals';
 import Modal from 'Components/Common/Modal';
 import { deleteMessage } from 'Store/Actions/message';
+import { closeModal } from 'Store/Actions/modals';
 
 const MessengerContainer = () => {
   const modal: ModalStateType = useSelector(
@@ -33,8 +34,13 @@ const MessengerContainer = () => {
     message: '',
   });
 
+  const handleClose = () => {
+    dispatch(closeModal(true));
+  };
+
   const handleDelete = () => {
     dispatch(deleteMessage(deleteModalData.id));
+    handleClose();
   };
 
   return (
@@ -45,8 +51,15 @@ const MessengerContainer = () => {
         setDeleteModalData={setDeleteModalData}
       />
       <MessageInput replyData={replyData} userId={userData?.userId} />
-      {!userData && <MessengerLogin />}
-      {/* {userData && <Modal question={deleteModalData.message} onSubmit={} />} */}
+      {!userData && modal.showModal && <MessengerLogin />}
+      {userData && modal.showModal && (
+        <Modal
+          type="delete"
+          question={deleteModalData.message}
+          onSubmit={handleDelete}
+          onClose={handleClose}
+        />
+      )}
     </main>
   );
 };
