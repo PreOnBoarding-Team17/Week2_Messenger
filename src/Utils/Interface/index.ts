@@ -27,3 +27,9 @@ export interface SendMessagePayloadInterface extends MessagePayloadInterface {
 export interface ReplyMessagePayloadInterface extends MessagePayloadInterface {
   replyMessageId: number;
 }
+
+export interface DataInterface {
+  user: UserInterface | null;
+  allUsers: UserInterface[];
+  allMessages: MessageInterface[];
+}
