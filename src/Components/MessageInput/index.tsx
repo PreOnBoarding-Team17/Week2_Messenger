@@ -34,18 +34,24 @@ const MessageInput: React.FC<MessageInputProps> = ({ replyData, userId }) => {
   }, [replyData]);
 
   const onClickSend = useCallback((): void => {
-    console.log(message);
-
-    if (message && userId) {
-      if (isReply) dispatch(replyMessage(userId, message, replyData.id));
-      else dispatch(sendMessage(userId, message));
+    setTimeout(() => {
+      if (message.trim() && userId) {
+        if (isReply) dispatch(replyMessage(userId, message, replyData.id));
+        else dispatch(sendMessage(userId, message));
+        setIsReply(false);
+      }
       setMessage('');
-      setIsReply(false);
-    }
+    }, 100);
   }, [dispatch, message, isReply]);
 
   const cancelReply = (): void => {
     setIsReply(false);
+  };
+
+  const onKeyEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
+    if (message && e.key === 'Enter') {
+      onClickSend();
+    }
   };
 
   return (
@@ -53,7 +59,11 @@ const MessageInput: React.FC<MessageInputProps> = ({ replyData, userId }) => {
       <section className="message-input">
         <div className="message-input__left-menu">
           <div className="message-input__left-menu__textarea">
-            <MessageTextArea value={message} onChange={onChangeInput} />
+            <MessageTextArea
+              value={message}
+              onChange={onChangeInput}
+              onKeyEnter={onKeyEnter}
+            />
           </div>
           {isReply && (
             <button
