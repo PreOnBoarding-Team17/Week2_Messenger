@@ -12,6 +12,7 @@ const MessageInput = () => {
   // userId 받아오는 로직 추가
 
   // reply 하는 경우 messageId 받아오는 로직 추가
+  // messageId 받아오고 사용자이름, 메세지 내용 받아오기
 
   const onChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setMessage(e.target.value);
@@ -35,6 +36,10 @@ const MessageInput = () => {
     setIsReply(true);
   };
 
+  const cancelReply = (): void => {
+    setIsReply(false);
+  };
+
   return (
     <>
       <section style={{ height: 'calc(80vh - 260px)' }}>
@@ -42,8 +47,18 @@ const MessageInput = () => {
         <button onClick={onClickReply}>임시reply버튼</button>
       </section>
       <section className="message-input">
-        <div className="message-input__textarea">
-          <MessageTextArea value={message} onChange={onChangeInput} />
+        <div className="message-input__left-menu">
+          {isReply && (
+            <button
+              className="message-input__left-menu__cancel-btn"
+              onClick={cancelReply}
+            >
+              reply 취소
+            </button>
+          )}
+          <div className="message-input__left-menu__textarea">
+            <MessageTextArea value={message} onChange={onChangeInput} />
+          </div>
         </div>
         <button
           type="button"
