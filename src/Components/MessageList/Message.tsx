@@ -13,15 +13,12 @@ interface MessageProps {
 
 const Message: React.FC<MessageProps> = ({ message, host, setReplyData }) => {
   const { id, user, content, date, reply } = message;
-  console.log(reply);
 
   const isHost = user.userId && user.userId === host?.userId ? true : false;
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
   };
-
-  console.log(content);
 
   const handleReply = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -49,7 +46,12 @@ const Message: React.FC<MessageProps> = ({ message, host, setReplyData }) => {
           <div className="message__profile--header-date"> {date}</div>
         </div>
       </div>
-      <div className="message__content">{content}</div>
+      <div
+        className={'messagecontent' + (reply ? ' messagecontent--reply' : '')}
+        dangerouslySetInnerHTML={{
+          __html: content.replace(/\r\n|\r|\n/g, '<br />'),
+        }}
+      ></div>
       <div className="message__btn">
         {isHost && (
           <button type="button" onClick={handleDelete}>
