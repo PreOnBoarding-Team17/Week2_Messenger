@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { replyMessage, sendMessage } from 'Store/Actions';
+import MessageTextArea from 'Components/MessageInput/MessageTextArea';
 import 'Components/MessageInput/scss/MessageInput.scss';
 
 const MessageInput = () => {
@@ -42,13 +43,7 @@ const MessageInput = () => {
       </section>
       <section className="message-input">
         <div className="message-input__textarea">
-          <textarea
-            name="message"
-            id="message"
-            placeholder="메세지를 입력해주세요 ✍🏻"
-            onChange={onChangeInput}
-            value={message}
-          ></textarea>
+          <MessageTextArea value={message} onChange={onChangeInput} />
         </div>
         <button
           type="button"
