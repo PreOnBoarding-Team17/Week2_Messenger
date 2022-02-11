@@ -55,7 +55,8 @@ const MessengerContainer = () => {
       {userData && modal.showModal && (
         <Modal
           type="delete"
-          question={deleteModalData.message}
+          question="메세지를 삭제하시겠습니까?"
+          message={deleteModalData.message}
           onSubmit={handleDelete}
           onClose={handleClose}
         />

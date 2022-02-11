@@ -1,8 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { showModal } from 'Store/Actions/modals';
-import { MessageInterface, UserInterface } from 'Utils/Interface';
-import { ReplyDataInterface, DeleteModalDataInterface } from 'Utils/Interface';
+import {
+  MessageInterface,
+  UserInterface,
+  ReplyDataInterface,
+  DeleteModalDataInterface,
+} from 'Utils/Interface';
 import 'Components/MessageList/scss/Message.scss';
 import Delete from 'Assets/Delete.png';
 import Reply from 'Assets/Reply.png';
@@ -23,9 +27,7 @@ const Message: React.FC<MessageProps> = ({
 
   const modalData: DeleteModalDataInterface = {
     id,
-    message:
-      (content.length >= 10 ? content.slice(0, 10) + '...' : content) +
-      ' 메시지를 삭제하시겠습니까?',
+    message: content.length >= 10 ? content.slice(0, 10) + '...' : content,
   };
   const isHost = user.userId && user.userId === host?.userId ? true : false;
 
