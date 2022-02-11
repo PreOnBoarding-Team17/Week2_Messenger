@@ -42,7 +42,7 @@ const MessageInput = () => {
 
   return (
     <>
-      <section style={{ height: 'calc(80vh - 260px)' }}>
+      <section>
         임시컨테이너
         <button onClick={onClickReply}>임시reply버튼</button>
       </section>
