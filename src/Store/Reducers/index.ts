@@ -6,6 +6,7 @@ import {
   DELETE_MESSAGE,
   REPLY_MESSAGE,
   LOGIN_USER,
+  LOGOUT_USER,
 } from 'Store/Actions/types';
 import { SAMPLEUSER, SAMPLEMESSAGE } from 'Utils/Constant';
 
@@ -15,6 +16,20 @@ interface DataInterface {
   allMessages: MessageInterface[];
 }
 
+interface MessagePayload {
+  id: number;
+  userId: number;
+  content: string;
+  data: string;
+}
+interface SendMessagePayload extends MessagePayload {
+  reply: null;
+}
+
+interface ReplyMessagePayload extends MessagePayload {
+  replyMessageId: number;
+}
+
 const initialState: DataInterface = {
   user: null,
   allUsers: SAMPLEUSER,
@@ -22,21 +37,23 @@ const initialState: DataInterface = {
 };
 
 const reducer = createReducer<DataInterface, MessengerAction>(initialState, {
-  [SEND_MESSAGE]: (state = initialState, action: any) => {
-    const filterUser = (userId: number) => {
-      const result = state.allUsers.filter((user) => user.userId === userId);
-      return result[0];
-    };
-
-    return {
-      ...state,
-      allMessages: [...state.allMessages].concat({
-        ...action,
-        user: filterUser(action.payload.userId),
-      }),
-    };
-  },
-  [REPLY_MESSAGE]: (state = initialState, action: any) => {
+  [SEND_MESSAGE]: (
+    state: DataInterface,
+    { payload }: { text: string; payload: SendMessagePayload }
+  ) => ({
+    ...state,
+    allMessages: [
+      ...state.allMessages,
+      {
+        ...payload,
+        ...state.allUsers.filter((user) => user.userId === payload.userId)[0],
+      },
+    ],
+  }),
+  [REPLY_MESSAGE]: (
+    state: DataInterface,
+    { payload }: { text: string; payload: ReplyMessagePayload }
+  ) => {
     const filterUser = (userId: number) => {
       const result = state.allUsers.filter((user) => user.userId === userId);
       return result[0];
@@ -48,35 +65,41 @@ const reducer = createReducer<DataInterface, MessengerAction>(initialState, {
       );
       return result[0];
     };
-
     return {
       ...state,
       allMessages: [
         ...state.allMessages,
         {
-          ...action,
-          user: filterUser(action.user.userId),
-          reply: filterMessage(action.id),
+          ...payload,
+          user: filterUser(payload.userId),
+          reply: filterMessage(payload.id),
         },
       ],
     };
   },
   [DELETE_MESSAGE]: (
-    state = initialState,
-    action: { payload: MessengerAction }
+    state: DataInterface,
+    { payload }: { type: string; payload: number }
   ) => ({
     ...state,
-    allMessages: state.allMessages.filter(
-      (message) => message.id !== action.payload
-    ),
+    allMessages: state.allMessages.filter((message) => message.id !== payload),
   }),
-  [LOGIN_USER]: (state = initialState, action: { payload: UserInterface }) => {
-    return {
-      ...state,
-      user: action.payload,
-      allUsers: [...state.allUsers, action.payload],
-    };
-  },
+  [LOGIN_USER]: (
+    state: DataInterface,
+    { payload }: { type: string; payload: UserInterface }
+  ) => ({
+    ...state,
+    user: payload,
+    allUsers: [...state.allUsers, payload],
+  }),
+  [LOGOUT_USER]: (
+    state: DataInterface,
+    { payload }: { type: string; payload: number }
+  ) => ({
+    ...state,
+    user: null,
+    allUsers: state.allUsers.filter((user) => user.userId !== payload),
+  }),
 });
 
 export default reducer;
