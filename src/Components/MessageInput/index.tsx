@@ -26,7 +26,6 @@ const MessageInput: React.FC<MessageInputProps> = ({ replyData, userId }) => {
     if (userId) {
       textareaRef.current?.focus();
     }
-    console.log('effect');
   }, [userId]);
 
   useEffect(() => {
@@ -55,7 +54,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ replyData, userId }) => {
   };
 
   const onKeyEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
-    if (message && e.key === 'Enter') {
+    if (message && e.key === 'Enter' && e.shiftKey === false) {
       setTimeout(() => {
         onClickSend();
       }, 200);
