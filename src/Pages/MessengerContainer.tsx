@@ -12,12 +12,6 @@ const MessengerContainer = () => {
     userName: '',
     message: '',
   });
-  // { userId, userName, message }
-
-  // const handlerSetReplayData = (data: ReplyDataInterface) => {
-  //   console.log(123);
-  //   setReplyData(data);
-  // };
 
   return (
     <main className="messenger-container">
