@@ -63,7 +63,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ replyData }) => {
           )}
         </div>
         <Button
-          style="message"
+          style="square"
           text="보내기"
           disabled={!message}
           onClick={onClickSend}
