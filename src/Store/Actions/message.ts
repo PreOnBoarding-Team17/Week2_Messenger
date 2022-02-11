@@ -6,7 +6,6 @@ import {
   REPLY_MESSAGE,
   LOGIN_USER,
   LOGOUT_USER,
-  ACTIONS,
 } from 'Store/Actions/types';
 
 let USER_ID = 4;
@@ -55,4 +54,12 @@ export const loginUser = createCustomAction(LOGIN_USER, (userName: string) => ({
 // 로그아웃
 export const logoutUser = createAction(LOGOUT_USER)<number>();
 
-export type MessengerAction = ActionType<typeof ACTIONS>;
+const actions = {
+  sendMessage,
+  replyMessage,
+  deleteMessage,
+  loginUser,
+  logoutUser,
+};
+
+export type MessengerAction = ActionType<typeof actions>;
