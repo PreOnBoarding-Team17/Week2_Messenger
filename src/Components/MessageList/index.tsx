@@ -31,21 +31,22 @@ const MessageList: React.FC<MessageListProps> = ({
   const prevAllMessagesLen = usePrevious<number>(allMessages.length);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const scrollBottom = () => {
+    messagesEndRef.current?.scrollIntoView({
+      behavior: 'smooth',
+    });
+  };
   useEffect(() => {
     prevAllMessagesLen &&
       prevAllMessagesLen < allMessages.length &&
-      messagesEndRef.current?.scrollIntoView({
-        behavior: 'smooth',
-      });
+      scrollBottom();
   }, [allMessages]);
 
   useEffect(() => {
     setTimeout(() => {
-      messagesEndRef.current?.scrollIntoView({
-        behavior: 'smooth',
-      });
-    }, 2000);
-  }, []);
+      scrollBottom();
+    }, 500);
+  }, [user]);
 
   return (
     <section className="message-list">
