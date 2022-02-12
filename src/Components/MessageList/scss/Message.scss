@@ -5,7 +5,7 @@
   width: 100%;
   min-height: 100px;
   border-bottom: 1px solid $lightgray;
-  padding: 24px 80px 24px 110px;
+  padding: 24px 85px 24px 110px;
   overflow-y: hidden;
 
   display: flex;
@@ -41,10 +41,18 @@
     color: $lightgray;
     margin-bottom: 8px;
   }
-  &__content {
+  &__contents {
     line-height: 1.5;
     font-size: 13px;
     font-weight: 500;
+
+    &--text {
+      padding: 12px;
+      border-radius: 8px;
+      display: inline-block;
+      background-color: #f3f7ff;
+      box-shadow: 5px 5px 4px 1px #8c8c8c;
+    }
   }
   &__content--reply {
     margin-left: 16px;
@@ -70,4 +78,8 @@
 
 .host {
   background-color: #f3f7ff;
+
+  .message__contents--text {
+    background-color: #f8e7a0;
+  }
 }

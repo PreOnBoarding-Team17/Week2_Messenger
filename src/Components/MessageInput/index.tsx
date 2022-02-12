@@ -31,8 +31,8 @@ const MessageInput: React.FC<MessageInputProps> = ({ replyData, userId }) => {
   useEffect(() => {
     if (replyData.id !== 0 && !isReply) {
       setMessage(
-        `${replyData.userName}\n` +
-          `${replyData.message}\n` +
+        `${replyData.userName}에게 답장\n` +
+          `${replyData.message}\n<hr/>` +
           `(회신)\n` +
           message
       );

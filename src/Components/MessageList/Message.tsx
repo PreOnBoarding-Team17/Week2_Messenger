@@ -67,14 +67,18 @@ const Message: React.FC<MessageProps> = ({
         </div>
       </div>
       {reply && <div className="message__reply">Reply Message</div>}
-      <div
-        className={
-          'message__content' + (reply ? ' message__content--reply' : '')
-        }
-        dangerouslySetInnerHTML={{
-          __html: content.replace(/\r\n|\r|\n/g, '<br />'),
-        }}
-      ></div>
+
+      <div className="message__contents">
+        <div
+          className={
+            'message__contents--text' +
+            (reply ? ' message__content--reply' : '')
+          }
+          dangerouslySetInnerHTML={{
+            __html: content.replace(/\r\n|\r|\n/g, '<br />'),
+          }}
+        ></div>
+      </div>
       <div className="message__btn">
         {isHost && (
           <button type="button" onClick={handleDelete}>
